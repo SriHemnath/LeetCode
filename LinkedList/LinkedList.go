@@ -91,7 +91,7 @@ func (n *LinkedList[T]) AddAtNode(index int, value T) error {
 
 func (n *LinkedList[T]) GetValueAt(index int) (T, error) {
 	var t T
-	if index == 0 || index < n.length || n.length == 0 {
+	if index == 0 || index > n.length || n.length == 0 {
 		return t, fmt.Errorf("Incorrect position. Total nodes in element is %d ", n.length)
 	}
 
