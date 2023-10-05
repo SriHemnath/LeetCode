@@ -12,11 +12,15 @@ type LinkedList[T any] struct {
 	length int
 }
 
-func NewList[T any]() *LinkedList[T] {
-	return &LinkedList[T]{
+func NewList[T any](values ...T) *LinkedList[T] {
+	ll := &LinkedList[T]{
 		Head:   nil,
 		length: 0,
 	}
+	for _, v := range values {
+		ll.AddValue(v)
+	}
+	return ll
 }
 
 func (n *LinkedList[T]) AddValue(value T) {
