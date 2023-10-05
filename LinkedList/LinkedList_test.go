@@ -6,7 +6,7 @@ import (
 )
 
 func TestLinkedList_AddValue(t *testing.T) {
-	list := NewList[int]()
+	list, _ := NewList[int]()
 
 	result, err := list.GetValueAt(1)
 	assert.ErrorContains(t, err, "Incorrect position. Total nodes in element is ")
