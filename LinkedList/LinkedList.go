@@ -11,14 +11,14 @@ type Node[T any] struct {
 }
 
 type LinkedList[T any] struct {
-	Head   *Node[T]
-	Length int
+	head   *Node[T]
+	length int
 }
 
 func NewList[T any](values ...T) *LinkedList[T] {
 	ll := &LinkedList[T]{
-		Head:   nil,
-		Length: 0,
+		head:   nil,
+		length: 0,
 	}
 	for _, v := range values {
 		ll.AddValue(v)
@@ -31,24 +31,24 @@ func (n *LinkedList[T]) AddValue(value T) {
 		value:    value,
 		nextNode: nil,
 	}
-	if n.Length == 0 && n.Head == nil {
-		n.Length++
-		n.Head = newNode
+	if n.length == 0 && n.head == nil {
+		n.length++
+		n.head = newNode
 		return
 	}
-	currentNode := n.Head
+	currentNode := n.head
 	for currentNode.nextNode != nil {
 		currentNode = currentNode.nextNode
 	}
 	currentNode.nextNode = newNode
-	n.Length++
+	n.length++
 }
 
 func (n *LinkedList[T]) PrintAll() {
-	if n.Length == 0 {
+	if n.length == 0 {
 		fmt.Println("Empty List")
 	}
-	curNode := n.Head
+	curNode := n.head
 	for curNode != nil {
 		fmt.Println(curNode.value)
 		curNode = curNode.nextNode
@@ -56,10 +56,10 @@ func (n *LinkedList[T]) PrintAll() {
 }
 
 func (n *LinkedList[T]) DeleteAtNode(index int) error {
-	if n.Length < index || n.Length == 0 || n.Head == nil || index == 0 {
-		return fmt.Errorf("Incorrect position. Total nodes in element is %d ", n.Length)
+	if n.length < index || n.length == 0 || n.head == nil || index == 0 {
+		return fmt.Errorf("Incorrect position. Total nodes in element is %d ", n.length)
 	}
-	currentNode := n.Head
+	currentNode := n.head
 	for i := 1; i < index-1; i++ {
 		currentNode = currentNode.nextNode
 	}
@@ -73,10 +73,10 @@ func (n *LinkedList[T]) DeleteAtNode(index int) error {
 }
 
 func (n *LinkedList[T]) AddAtNode(index int, value T) error {
-	if n.Length < index || n.Length == 0 || n.Head == nil || index == 0 {
-		return fmt.Errorf("Incorrect position. Total nodes in element is %d ", n.Length)
+	if n.length < index || n.length == 0 || n.head == nil || index == 0 {
+		return fmt.Errorf("Incorrect position. Total nodes in element is %d ", n.length)
 	}
-	currentNode := n.Head
+	currentNode := n.head
 	for i := 1; i < index; i++ {
 		currentNode = currentNode.nextNode
 	}
@@ -91,11 +91,11 @@ func (n *LinkedList[T]) AddAtNode(index int, value T) error {
 
 func (n *LinkedList[T]) GetValueAt(index int) (T, error) {
 	var t T
-	if index == 0 || index < n.Length {
-		return t, fmt.Errorf("Incorrect position. Total nodes in element is %d ", n.Length)
+	if index == 0 || index < n.length || n.length == 0 {
+		return t, fmt.Errorf("Incorrect position. Total nodes in element is %d ", n.length)
 	}
 
-	currentNode := n.Head
+	currentNode := n.head
 	for i := 1; i < index; i++ {
 		currentNode = currentNode.nextNode
 	}
@@ -103,11 +103,11 @@ func (n *LinkedList[T]) GetValueAt(index int) (T, error) {
 }
 
 func (n *LinkedList[T]) GetAllValues() ([]T, error) {
-	if n.Length == 0 {
+	if n.length == 0 {
 		return nil, errors.New("Empty list")
 	}
 	list := make([]T, 0)
-	curNode := n.Head
+	curNode := n.head
 	for curNode != nil {
 		list = append(list, curNode.value)
 		curNode = curNode.nextNode
